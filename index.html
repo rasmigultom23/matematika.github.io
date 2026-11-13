@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ujian Matematika Kelas 9 - Rasmi Gultom</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    overflow: hidden;
+  }
+  header {
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: #fff;
+    padding: 25px;
+    text-align: center;
+  }
+  header h1 { font-size: 1.6em; margin-bottom: 8px; }
+  header p { opacity: 0.9; font-size: 0.95em; }
+  .guru { color: #ffd700; font-weight: bold; }
+  .section { padding: 25px 30px; }
+  .identity-box {
+    background: #f0f4f8;
+    border-left: 5px solid #2a5298;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+  }
+  .identity-box h2 {
+    color: #1e3c72;
+    font-size: 1.15em;
+    margin-bottom: 15px;
+  }
+  .form-group { margin-bottom: 12px; }
+  .form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #444;
+  }
+  .form-group input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 2px solid #ccd6e0;
+    border-radius: 6px;
+    font-size: 1em;
+    transition: border 0.3s;
+  }
+  .form-group input:focus {
+    outline: none;
+    border-color: #2a5298;
+  }
+  .camera-box {
+    background: #f0f4f8;
+    border-left: 5px solid #e67e22;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    text-align: center;
+  }
+  .camera-box h2 {
+    color: #b35309;
+    font-size: 1.15em;
+    margin-bottom: 12px;
+  }
+  .video-wrapper {
+    position: relative;
+    display: inline-block;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  }
+  video {
+    width: 320px;
+    height: 240px;
+    display: block;
+    transform: scaleX(-1);
+  }
+  .cam-status {
+    margin-top: 10px;
+    font-size: 0.9em;
+    font-weight: 600;
+  }
+  .cam-status.on { color: #27ae60; }
+  .cam-status.off { color: #e74c3c; }
+  .btn-cam {
+    margin-top: 12px;
+    background: #e67e22;
+    color: #fff;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 6px;
+    font-size: 1em;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+  .btn-cam:hover { background: #ca6f1e; }
+  .soal-header {
+    background: #1e3c72;
+    color: #fff;
+    padding: 12px 18px;
+    border-radius: 8px 8px 0 0;
+    font-weight: bold;
+    font-size: 1.05em;
+  }
+  .soal {
+    border: 1px solid #d5dde6;
+    border-radius: 8px;
+    margin-bottom: 18px;
+    overflow: hidden;
+    background: #fff;
+  }
+  .soal-body { padding: 18px; }
+  .soal-body p.pertanyaan {
+    font-weight: 600;
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+  .options { display: flex; flex-direction: column; gap: 8px; }
+  .option {
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    background: #f7f9fb;
+    border: 2px solid #e1e8f0;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.98em;
+  }
+  .option:hover {
+    background: #eaf1f8;
+    border-color: #2a5298;
+  }
+  .option input { margin-right: 10px; transform: scale(1.2); }
+  .option.selected {
+    background: #d6e7ff;
+    border-color: #2a5298;
+  }
+  .badge {
+    display: inline-block;
+    background: #2a5298;
+    color: #fff;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.75em;
+    margin-left: 8px;
+    font-weight: 500;
+  }
+  .submit-area {
+    text-align: center;
+    padding: 20px 30px 40px;
+  }
+  .btn-submit {
+    background: linear-gradient(135deg, #11998e, #38ef7d);
+    color: #fff;
+    border: none;
+    padding: 16px 50px;
+    font-size: 1.15em;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 5px 20px rgba(17,153,142,0.4);
+  }
+  .btn-submit:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(17,153,142,0.6);
+  }
+  #hasil {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 1.1em;
+    display: none;
+  }
+  #hasil.show { display: block; }
+  .result-good { background: #d4edda; color: #155724; border: 2px solid #28a745; }
+  .result-mid { background: #fff3cd; color: #856404; border: 2px solid #ffc107; }
+  .result-bad { background: #f8d7da; color: #721c24; border: 2px solid #dc3545; }
+  .warning {
+    color: #e74c3c;
+    font-weight: 600;
+    margin-top: 10px;
+    display: none;
+  }
+  @media (max-width: 600px) {
+    .section { padding: 15px; }
+    video { width: 100%; height: auto; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>📐 Ujian Matematika Kelas 9</h1>
+    <p>Bilangan Berpangkat &amp; Bentuk Akar • SPLDV • Bangun Ruang Sisi Datar &amp; Lengkung</p>
+    <p style="margin-top:8px;">Guru : <span class="guru">Rasmi Gultom</span></p>
+  </header>
+
+  <div class="section">
+    <!-- IDENTITAS -->
+    <div class="identity-box">
+      <h2>👤 Identitas Siswa</h2>
+      <div class="form-group">
+        <label for="nama">Nama Lengkap</label>
+        <input type="text" id="nama" placeholder="Masukkan nama lengkap">
+      </div>
+      <div class="form-group">
+        <label for="kelas">Kelas</label>
+        <input type="text" id="kelas" placeholder="Contoh: IX-A">
+      </div>
+    </div>
+
+    <!-- WEBCAM -->
+    <div class="camera-box">
+      <h2>📷 Aktifkan Kamera</h2>
+      <div class="video-wrapper">
+        <video id="video" autoplay playsinline muted></video>
+      </div>
+      <div class="cam-status off" id="camStatus">Kamera belum aktif</div>
+      <br>
+      <button class="btn-cam" id="btnCam" onclick="aktifkanKamera()">Aktifkan Kamera</button>
+    </div>
+
+    <!-- SOAL -->
+    <div class="soal-header">📝 Soal Ujian (20 Soal)</div>
+    <form id="quizForm"></form>
+
+    <div class="submit-area">
+      <button class="btn-submit" onclick="submitUjian()">✅ Kumpulkan Jawaban</button>
+      <div class="warning" id="warning"></div>
+      <div id="hasil"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ================== DATA SOAL ==================
+const soalData = [
+  // ---- Bilangan Berpangkat & Bentuk Akar (1-6) ----
+  {
+    pertanyaan: "Hasil dari 2³ × 2⁴ adalah ...",
+    opsi: ["2⁷", "2¹²", "4⁷", "2¹"],
+    jawaban: 0,
+    topik: "Bilangan Berpangkat"
+  },
+  {
+    pertanyaan: "Nilai dari (3²)³ adalah ...",
+    opsi: ["3⁵", "3⁶", "3⁸", "3⁹"],
+    jawaban: 1,
+    topik: "Bilangan Berpangkat"
+  },
+  {
+    pertanyaan: "Hasil dari √50 + √18 adalah ...",
+    opsi: ["8√2", "8√3", "4√2", "2√68"],
+    jawaban: 0,
+    topik: "Bentuk Akar"
+  },
+  {
+    pertanyaan: "Bentuk sederhana dari √75 adalah ...",
+    opsi: ["3√5", "5√3", "15√3", "25√3"],
+    jawaban: 1,
+    topik: "Bentuk Akar"
+  },
+  {
+    pertanyaan: "Nilai dari 5⁻² adalah ...",
+    opsi: ["-25", "-10", "1/25", "1/10"],
+    jawaban: 2,
+    topik: "Bilangan Berpangkat"
+  },
+  {
+    pertanyaan: "Hasil dari (2√3)(3√5) adalah ...",
+    opsi: ["6√15", "5√15", "6√8", "15√2"],
+    jawaban: 0,
+    topik: "Bentuk Akar"
+  },
+  // ---- SPLDV (7-11) ----
+  {
+    pertanyaan: "Diketahui sistem persamaan: x + y = 10 dan x − y = 4. Nilai x dan y berturut-turut adalah ...",
+    opsi: ["x=7, y=3", "x=6, y=4", "x=8, y=2", "x=5, y=5"],
+    jawaban: 0,
+    topik: "SPLDV"
+  },
+  {
+    pertanyaan: "Himpunan penyelesaian dari 2x + y = 8 dan x − y = 1 adalah ...",
+    opsi: ["(3, 2)", "(2, 3)", "(4, 0)", "(1, 5)"],
+    jawaban: 0,
+    topik: "SPLDV"
+  },
+  {
+    pertanyaan: "Harga 2 buku dan 3 pensil adalah Rp13.000. Harga 3 buku dan 1 pensil adalah Rp12.000. Harga 1 buku adalah ...",
+    opsi: ["Rp3.000", "Rp3.500", "Rp4.000", "Rp4.500"],
+    jawaban: 1,
+    topik: "SPLDV"
+  },
+  {
+    pertanyaan: "Jika x + 2y = 7 dan 2x − y = 4, maka nilai x · y adalah ...",
+    opsi: ["6", "8", "10", "12"],
+    jawaban: 0,
+    topik: "SPLDV"
+  },
+  {
+    pertanyaan: "Penyelesaian dari 3x − y = 5 dan x + y = 7 adalah ...",
+    opsi: ["(3, 4)", "(4, 3)", "(2, 5)", "(5, 2)"],
+    jawaban: 0,
+    topik: "SPLDV"
+  },
+  // ---- Bangun Ruang Sisi Datar (12-15) ----
+  {
+    pertanyaan: "Volume kubus dengan panjang rusuk 6 cm adalah ...",
+    opsi: ["36 cm³", "216 cm³", "144 cm³", "108 cm³"],
+    jawaban: 1,
+    topik: "Bangun Ruang Sisi Datar"
+  },
+  {
+    pertanyaan: "Luas permukaan balok dengan panjang 8 cm, lebar 5 cm, dan tinggi 4 cm adalah ...",
+    opsi: ["160 cm²", "184 cm²", "200 cm²", "220 cm²"],
+    jawaban: 1,
+    topik: "Bangun Ruang Sisi Datar"
+  },
+  {
+    pertanyaan: "Volume prisma segitiga dengan luas alas 24 cm² dan tinggi 10 cm adalah ...",
+    opsi: ["120 cm³", "240 cm³", "340 cm³", "480 cm³"],
+    jawaban: 1,
+    topik: "Bangun Ruang Sisi Datar"
+  },
+  {
+    pertanyaan: "Sebuah limas persegi memiliki panjang sisi alas 10 cm dan tinggi 12 cm. Volume limas tersebut adalah ...",
+    opsi: ["400 cm³", "480 cm³", "600 cm³", "1.200 cm³"],
+    jawaban: 0,
+    topik: "Bangun Ruang Sisi Datar"
+  },
+  // ---- Bangun Ruang Sisi Lengkung (16-20) ----
+  {
+    pertanyaan: "Volume tabung dengan jari-jari 7 cm dan tinggi 10 cm adalah ... (π = 22/7)",
+    opsi: ["1.540 cm³", "1.540 cm²", "440 cm³", "2.200 cm³"],
+    jawaban: 0,
+    topik: "Bangun Ruang Sisi Lengkung"
+  },
+  {
+    pertanyaan: "Luas permukaan bola dengan jari-jari 7 cm adalah ... (π = 22/7)",
+    opsi: ["154 cm²", "308 cm²", "616 cm²", "1.232 cm²"],
+    jawaban: 2,
+    topik: "Bangun Ruang Sisi Lengkung"
+  },
+  {
+    pertanyaan: "Volume kerucut dengan jari-jari 7 cm dan tinggi 24 cm adalah ... (π = 22/7)",
+    opsi: ["1.232 cm³", "1.540 cm³", "3.696 cm³", "4.928 cm³"],
+    jawaban: 0,
+    topik: "Bangun Ruang Sisi Lengkung"
+  },
+  {
+    pertanyaan: "Luas selimut tabung dengan jari-jari 10 cm dan tinggi 15 cm adalah ... (π = 3,14)",
+    opsi: ["471 cm²", "942 cm²", "1.570 cm²", "2.355 cm²"],
+    jawaban: 1,
+    topik: "Bangun Ruang Sisi Lengkung"
+  },
+  {
+    pertanyaan: "Sebuah bola memiliki volume 4.500π cm³. Jari-jari bola tersebut adalah ...",
+    opsi: ["10 cm", "15 cm", "20 cm", "25 cm"],
+    jawaban: 1,
+    topik: "Bangun Ruang Sisi Lengkung"
+  }
+];
+
+// ================== RENDER SOAL ==================
+const form = document.getElementById('quizForm');
+soalData.forEach((s, i) => {
+  const div = document.createElement('div');
+  div.className = 'soal';
+  div.innerHTML = `
+    <div class="soal-header">
+      Soal ${i+1} <span class="badge">${s.topik}</span>
+    </div>
+    <div class="soal-body">
+      <p class="pertanyaan">${s.pertanyaan}</p>
+      <div class="options">
+        ${s.opsi.map((o, j) => `
+          <label class="option" id="opt-${i}-${j}">
+            <input type="radio" name="q${i}" value="${j}" onchange="pilihOpsi(${i}, ${j})">
+            ${String.fromCharCode(65+j)}. ${o}
+          </label>
+        `).join('')}
+      </div>
+    </div>
+  `;
+  form.appendChild(div);
+});
+
+function pilihOpsi(i, j) {
+  soalData[i].opsi.forEach((_, k) => {
+    document.getElementById(`opt-${i}-${k}`).classList.remove('selected');
+  });
+  document.getElementById(`opt-${i}-${j}`).classList.add('selected');
+}
+
+// ================== WEBCAM ==================
+let stream = null;
+let kameraAktif = false;
+
+async function aktifkanKamera() {
+  const video = document.getElementById('video');
+  const status = document.getElementById('camStatus');
+  const btn = document.getElementById('btnCam');
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+    video.srcObject = stream;
+    kameraAktif = true;
+    status.textContent = "✅ Kamera aktif";
+    status.className = "cam-status on";
+    btn.textContent = "Matikan Kamera";
+    btn.onclick = matikanKamera;
+  } catch (err) {
+    status.textContent = "❌ Gagal mengakses kamera: " + err.message;
+    status.className = "cam-status off";
+    alert("Tidak dapat mengakses kamera. Pastikan izin kamera diberikan.");
+  }
+}
+
+function matikanKamera() {
+  if (stream) {
+    stream.getTracks().forEach(t => t.stop());
+    stream = null;
+  }
+  kameraAktif = false;
+  const video = document.getElementById('video');
+  video.srcObject = null;
+  const status = document.getElementById('camStatus');
+  status.textContent = "Kamera dimatikan";
+  status.className = "cam-status off";
+  const btn = document.getElementById('btnCam');
+  btn.textContent = "Aktifkan Kamera";
+  btn.onclick = aktifkanKamera;
+}
+
+// ================== SUBMIT ==================
+function submitUjian() {
+  const nama = document.getElementById('nama').value.trim();
+  const kelas = document.getElementById('kelas').value.trim();
+  const warning = document.getElementById('warning');
+  const hasilDiv = document.getElementById('hasil');
+
+  warning.style.display = 'none';
+  hasilDiv.className = '';
+
+  // Validasi
+  if (!nama) {
+    warning.textContent = "⚠️ Nama harus diisi!";
+    warning.style.display = 'block';
+    document.getElementById('nama').focus();
+    return;
+  }
+  if (!kelas) {
+    warning.textContent = "⚠️ Kelas harus diisi!";
+    warning.style.display = 'block';
+    document.getElementById('kelas').focus();
+    return;
+  }
+  if (!kameraAktif) {
+    warning.textContent = "⚠️ Kamera harus aktif sebelum mengumpulkan ujian!";
+    warning.style.display = 'block';
+    return;
+  }
+
+  // Hitung jawaban
+  let benar = 0, salah = 0, kosong = 0;
+  const detail = [];
+  soalData.forEach((s, i) => {
+    const picked = document.querySelector(`input[name="q${i}"]:checked`);
+    if (!picked) {
+      kosong++;
+      detail.push(`Soal ${i+1}: <span style="color:#e67e22;">Tidak dijawab</span> (Jawaban: ${String.fromCharCode(65+s.jawaban)})`);
+    } else if (parseInt(picked.value) === s.jawaban) {
+      benar++;
+      detail.push(`Soal ${i+1}: <span style="color:#27ae60;">✔ Benar</span>`);
+    } else {
+      salah++;
+      detail.push(`Soal ${i+1}: <span style="color:#e74c3c;">✘ Salah</span> (Jawaban benar: ${String.fromCharCode(65+s.jawaban)})`);
+    }
+  });
+
+  const skor = Math.round((benar / soalData.length) * 100);
+
+  let kelasHasil = 'result-bad';
+  let predikat = 'Perlu Belajar Lagi';
+  if (skor >= 85) { kelasHasil = 'result-good'; predikat = 'Sangat Baik 🌟'; }
+  else if (skor >= 70) { kelasHasil = 'result-mid'; predikat = 'Baik 👍'; }
+  else if (skor >= 60) { kelasHasil = 'result-mid'; predikat = 'Cukup'; }
+
+  hasilDiv.className = 'show ' + kelasHasil;
+  hasilDiv.innerHTML = `
+    <h3 style="margin-bottom:12px;">📊 Hasil Ujian</h3>
+    <p><strong>Nama:</strong> ${nama}</p>
+    <p><strong>Kelas:</strong> ${kelas}</p>
+    <p><strong>Guru:</strong> Rasmi Gultom</p>
+    <hr style="margin:12px 0; border:none; border-top:1px solid rgba(0,0,0,0.1);">
+    <p><strong>Benar:</strong> ${benar} soal</p>
+    <p><strong>Salah:</strong> ${salah} soal</p>
+    <p><strong>Tidak Dijawab:</strong> ${kosong} soal</p>
+    <p style="font-size:1.3em; margin-top:10px;"><strong>Nilai: ${skor}</strong></p>
+    <p><strong>Predikat:</strong> ${predikat}</p>
+    <details style="margin-top:12px;">
+      <summary style="cursor:pointer; font-weight:600;">Lihat Detail Jawaban</summary>
+      <div style="margin-top:8px; font-size:0.92em; line-height:1.8;">${detail.join('<br>')}</div>
+    </details>
+  `;
+
+  hasilDiv.scrollIntoView({ behavior: 'smooth' });
+
+  // Nonaktifkan form setelah submit
+  document.querySelectorAll('input[type="radio"]').forEach(r => r.disabled = true);
+  document.querySelector('.btn-submit').disabled = true;
+  document.querySelector('.btn-submit').style.opacity = '0.6';
+  document.querySelector('.btn-submit').textContent = '✔ Ujian Telah Dikumpulkan';
+}
+</script>
+</body>
+</html>
